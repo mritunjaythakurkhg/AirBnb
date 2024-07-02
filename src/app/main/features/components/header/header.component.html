@@ -1,0 +1,90 @@
+<header class="fixed w-full z-10">
+  <div class="flex flex-row justify-between px-20 bg-white">
+    <div>
+      <img src="assets/Airbnb-01.jpg" class="h-24 w-24" />
+    </div>
+
+    <div class="pt-2 flex justify-center">
+      <div
+        class="rounded-full border shadow-md border-gray-200 h-14 w-full items-center flex flex-row justify-center m-4"
+      >
+        <div class="relative flex items-center ml-6">
+          <div>{{ checkInDate ? (checkInDate | date) : "Check in" }}</div>
+          <input
+            class="absolute invisible"
+            matInput
+            [min]="minDate"
+            [matDatepicker]="picker"
+            [(ngModel)]="checkInDate"
+            placeholder="Check In"
+            (ngModelChange)="changeMinDate()"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <span class="mr-4 ml-4 text-2xl text-slate-200">|</span>
+        <div class="relative flex items-center">
+          <div>{{ checkOutDate ? (checkOutDate | date) : "Check out" }}</div>
+          <input
+            class="absolute invisible"
+            matInput
+            [min]="maxDate"
+            [matDatepicker]="pickers"
+            [(ngModel)]="checkOutDate"
+            placeholder="Check out"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickers"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickers></mat-datepicker>
+        </div>
+        <span class="mr-6 ml-4 text-2xl text-slate-200">|</span>
+
+        <!-- guest addition -->
+        <button
+          [matMenuTriggerFor]="menu"
+          (menuClosed)="menuClosed()"
+          (menuOpened)="menuOpen()"
+          class="rounded-full"
+        >
+          {{ +addedGuest ?  +addedGuest : "Add"}} Guest
+        </button>
+        <button
+          class="rounded-full bg-red-400 hover:bg-red-800 w-8 h-8 flex ml-4 mr-2"
+        >
+          <mat-icon class="m-auto" [ngStyle]="{ color: 'white' }"
+            >search</mat-icon
+          >
+        </button>
+
+        <mat-menu #menu="matMenu" class="rounded-full">
+          <div (click)="$event.stopPropagation()" class="flex items-center space-x-4 px-4 py-2" >
+            <div>Adults:</div>
+              <button mat-menu-item (click)="increaseQuantity()" class="rounded-full bg-slate-500">
+                <span class="font-semibold">+</span>
+              </button>
+              <div mat-menu-item [(ngModel)]="item">{{item}}</div>
+              <button mat-menu-item (click)="decreaseQuantity()" class="rounded-full bg-slate-500">
+                <span class="font-semibold">-</span>
+              </button>
+            </div>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div class="pt-7">
+      <div
+        class="rounded-full border shadow-md border-gray-200 h-10 w-20 items-center flex flex-row justify-center cursor-pointer"
+      >
+        <button class="mr-2 mt-1"><mat-icon>list</mat-icon></button>
+        <button class="ml-2 mt-1">
+          <mat-icon class="text-red-400">account_circle</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

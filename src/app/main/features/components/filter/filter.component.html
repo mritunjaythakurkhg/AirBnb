@@ -1,0 +1,7 @@
+<div class="mt-28 px-14 flex flex-row justify-between">
+    <div class="flex-1 hover:scale-110 transform-cpu" *ngFor="let i of icons" (click)="filterViews(i)">
+        <img [src]="i.image_url" class="h-6 w-6 fill-slate-500">
+        <p class="text-slate-600" [ngClass]="{'blue': i.enabled}">{{i.name}}</p>
+    </div>
+</div>
+

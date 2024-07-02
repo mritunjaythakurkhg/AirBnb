@@ -1,0 +1,5 @@
+<app-header></app-header>
+<hr>
+<app-filter (newItemEvent)="onDatachange($event)"></app-filter>
+<app-detailpage [filteredData]="filteredData"></app-detailpage>
+<router-outlet></router-outlet>
